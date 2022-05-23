@@ -1,8 +1,20 @@
 import React from 'react'
-import { View, Text, Image, TouchableOpacity, Dimensions } from 'react-native'
+import { View, Text, Image, TouchableOpacity, StyleSheet, Dimensions } from 'react-native'
 import { AuthUserInput } from './AuthUserInput'
 
 const { height, width } = Dimensions.get('window')
+
+const LoginOption = props => (
+  <View style={styles.loginOptionWrapper}>
+    <Image 
+      style={{ 
+        width: 28, 
+        height: 28 
+      }} 
+      source={{uri: props.optionImage}}/>
+    <Text>{props.optionName}</Text>
+  </View>
+)
 
 const Login = () => {
   const [ email, setEmail ] = React.useState('')
@@ -55,36 +67,29 @@ const Login = () => {
           justifyContent: 'space-between',
           marginTop: 15
         }}>
-          <View style={{
-            width: '48%',
-            backgroundColor: '#e4e4e4',
-            paddingVertical: 10,
-            paddingHorizontal: 12,
-            flexDirection: 'row',
-            justifyContent: 'space-around',
-            alignItems: 'center',
-            borderRadius: 30
-          }}>
-            <Image style={{ width: 28, height: 28 }} source={{uri: 'https://scontent.fhan14-1.fna.fbcdn.net/v/t1.15752-9/271207277_1132573497568976_3506931056740966135_n.png?stp=cp0_dst-png&_nc_cat=105&ccb=1-7&_nc_sid=ae9488&_nc_ohc=lcdC3DMV2skAX_AcvYa&_nc_ht=scontent.fhan14-1.fna&oh=03_AVKoF2FR2FRSQW1PfJoX0dj6RtOxQUtmi7p72-XM95r7jA&oe=62B30937'}}/>
-            <Text>Facebook</Text>
-          </View>
-          <View style={{
-            width: '48%',
-            backgroundColor: '#e4e4e4',
-            paddingVertical: 10,
-            paddingHorizontal: 12,
-            flexDirection: 'row',
-            justifyContent: 'space-around',
-            alignItems: 'center',
-            borderRadius: 30
-          }}>
-            <Image style={{ width: 28, height: 28 }} source={{uri: 'https://scontent.fhan14-2.fna.fbcdn.net/v/t1.15752-9/277115727_517904133057362_3857535230431844028_n.png?stp=cp0_dst-png&_nc_cat=100&ccb=1-7&_nc_sid=ae9488&_nc_ohc=Af_T1LeqKB8AX-uHs8p&tn=SjqDQmKiiUESt38z&_nc_ht=scontent.fhan14-2.fna&oh=03_AVKKmkAnWjBmVZPdqPgMjgED8JiYKzBzYIHldK3l6OOXkw&oe=62B0FCB1'}}/>
-            <Text>Google</Text>
-          </View>
+          <LoginOption 
+            optionName='Facebook'
+            optionImage='https://scontent.fhan14-1.fna.fbcdn.net/v/t1.15752-9/271207277_1132573497568976_3506931056740966135_n.png?stp=cp0_dst-png&_nc_cat=105&ccb=1-7&_nc_sid=ae9488&_nc_ohc=lcdC3DMV2skAX_AcvYa&_nc_ht=scontent.fhan14-1.fna&oh=03_AVKoF2FR2FRSQW1PfJoX0dj6RtOxQUtmi7p72-XM95r7jA&oe=62B30937'/>
+          <LoginOption 
+            optionName='Google'
+            optionImage='https://scontent.fhan14-2.fna.fbcdn.net/v/t1.15752-9/277115727_517904133057362_3857535230431844028_n.png?stp=cp0_dst-png&_nc_cat=100&ccb=1-7&_nc_sid=ae9488&_nc_ohc=Af_T1LeqKB8AX-uHs8p&tn=SjqDQmKiiUESt38z&_nc_ht=scontent.fhan14-2.fna&oh=03_AVKKmkAnWjBmVZPdqPgMjgED8JiYKzBzYIHldK3l6OOXkw&oe=62B0FCB1'/>
         </View>
       </View>
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  loginOptionWrapper: {
+    width: '48%',
+    backgroundColor: '#e4e4e4',
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    borderRadius: 30
+  }
+})
 
 export { Login }
