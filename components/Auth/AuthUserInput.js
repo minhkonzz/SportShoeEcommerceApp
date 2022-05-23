@@ -23,7 +23,7 @@ const AuthUserInput = props => {
           backgroundColor: '#E4E4E4' 
       }}
         placeholder={placeHolderInput}
-        onChangeText={(v) => props.onChangeText(v)}/>
+        onChangeText={v => props.onChangeText(v)}/>
       <Image 
         style={{
           width: 20,
