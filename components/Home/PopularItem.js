@@ -19,7 +19,7 @@ const PopularItem = ({item}) => {
           borderTopRightRadius: 20
         }}>
           <Image 
-            source={{uri: 'http://surl.li/bulxp'}}
+            source={{uri: 'https://scontent.xx.fbcdn.net/v/t1.15752-9/275889303_357657152977503_3444272465749790507_n.png?stp=cp0_dst-png&_nc_cat=102&ccb=1-7&_nc_sid=aee45a&_nc_ohc=DNrnBdbvZ5wAX8BfIlm&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AVIOgb6-kM6uMaWVofpA8qnoyyA6_8cZvPQB9Xu4ncq9ow&oe=62B0C1F9'}}
             style={{
               width: width/( width < height ? 13 : 18),
               height: height/( width < height ? 25 : 10),
@@ -70,7 +70,7 @@ const PopularItem = ({item}) => {
               useAngle={true}
               angle={145}>
               <Image 
-                source={{uri: 'http://surl.li/burbu'}}
+                source={{uri: 'https://scontent.xx.fbcdn.net/v/t1.15752-9/279298070_1108662796414542_3020499648913879667_n.png?stp=cp0_dst-png&_nc_cat=106&ccb=1-7&_nc_sid=aee45a&_nc_ohc=FKKFh_X6c6QAX9-fzhi&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AVJwZphViqZJzeYMuq_CUhX8ixkwFWU0WSt7pF7ZRtEMfw&oe=62B27483'}}
                 style={{
                   width: width < height ? '44%' : '50%',
                   height: width < height ? '46%' : '52%'

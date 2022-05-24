@@ -42,7 +42,7 @@ const NewCollectionItem = ({item, index}) => {
                 color: 'black'
               }}>{item.brand}</Text>
               <Image 
-                source={{uri: 'http://surl.li/bulxp'}}
+                source={{uri: 'https://scontent.xx.fbcdn.net/v/t1.15752-9/275889303_357657152977503_3444272465749790507_n.png?stp=cp0_dst-png&_nc_cat=102&ccb=1-7&_nc_sid=aee45a&_nc_ohc=DNrnBdbvZ5wAX8BfIlm&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AVIOgb6-kM6uMaWVofpA8qnoyyA6_8cZvPQB9Xu4ncq9ow&oe=62B0C1F9'}}
                 style={{
                   width: '11.1%',
                   height: '36.5%'
@@ -54,7 +54,7 @@ const NewCollectionItem = ({item, index}) => {
                 fontWeight: 'bold'
               }}>{item.productName}</Text>
               <Image 
-                source={{uri: 'http://surl.li/bulyy'}}
+                source={{uri: 'https://scontent.xx.fbcdn.net/v/t1.15752-9/276020259_3777025059088640_995851757737191318_n.png?stp=cp0_dst-png&_nc_cat=100&ccb=1-7&_nc_sid=aee45a&_nc_ohc=vLTao2-PSQgAX8FRRtf&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AVJfOC28gmOempW0rKNNHonqCJ-RclK8RfJfwMjS0VzJ9A&oe=62B135FB'}}
                 style={{
                   width: '18%',
                   height: '20%',
