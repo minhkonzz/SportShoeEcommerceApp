@@ -14,7 +14,6 @@ const Register = () => {
       // height: '100%',
       alignItems: 'center',
       alignSelf: 'flex-end',
-      backgroundColor: 'white'
     }}>
       <AuthUserInput 
         res={{
