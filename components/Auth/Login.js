@@ -16,7 +16,7 @@ const LoginOption = props => (
   </View>
 )
 
-const Login = () => {
+const Login = props => {
   const [ email, setEmail ] = React.useState('')
   const [ password, setPassword ] = React.useState('')
   return (
@@ -46,7 +46,8 @@ const Login = () => {
           alignItems: 'center',
           elevation: 5
         }} 
-        activeOpacity={0.8}>
+        activeOpacity={0.8}
+        onPress={() => props.navigation.navigate('Main')}>
         <Text style={{
           color: 'white',
           fontSize: 16,

@@ -22,47 +22,45 @@ const Auth = () => {
           height: 20,
           alignSelf: 'center'
         }}/>
-      <NavigationContainer>
-        <AuthTab.Navigator
-          sceneContainerStyle={{ backgroundColor: '#fcfcfc' }}
-          style={{ marginTop: height / 12 }}
-          initialRouteName="Login"
-          screenOptions={{
-            tabBarActiveTintColor: '#E4E4E4',
-            tabBarInactiveTintColor: '#5F5E5E',
-            tabBarLabelStyle: { 
-              fontSize: 14,
-              fontFamily: 'Montserrat-Medium',
-              textTransform: 'none' 
-            },
-            tabBarStyle: { 
-              backgroundColor: '#fcfcfc', 
-              width: '60%',
-              height: 45, 
-              alignSelf: 'center',
-              borderRadius: 25,
-              marginBottom: '3%',
-              elevation: 0
-            },
-            tabBarIndicatorStyle: {
-              backgroundColor: '#5f5e5e', 
-              height: 45, 
-              borderRadius: 25, 
-              elevation: 5
-            }
-        }}>
-          <AuthTab.Screen 
-            name="Login" 
-            component={ Login } 
-            options={{ tabBarLabel: 'Đăng nhập' }}/>
-          <AuthTab.Screen 
-            name="Register" 
-            component={ Register } 
-            options={{ tabBarLabel: 'Đăng ký' }}/>
-        </AuthTab.Navigator>
-      </NavigationContainer>
+      <AuthTab.Navigator
+        sceneContainerStyle={{ backgroundColor: '#fcfcfc' }}
+        style={{ marginTop: height / 12 }}
+        initialRouteName="Login"
+        screenOptions={{
+          tabBarActiveTintColor: '#E4E4E4',
+          tabBarInactiveTintColor: '#5F5E5E',
+          tabBarLabelStyle: { 
+            fontSize: 14,
+            fontFamily: 'Montserrat-Medium',
+            textTransform: 'none' 
+          },
+          tabBarStyle: { 
+            backgroundColor: '#fcfcfc', 
+            width: '60%',
+            height: 45, 
+            alignSelf: 'center',
+            borderRadius: 25,
+            marginBottom: '3%',
+            elevation: 0
+          },
+          tabBarIndicatorStyle: {
+            backgroundColor: '#5f5e5e', 
+            height: 45, 
+            borderRadius: 25, 
+            elevation: 5
+          }
+      }}>
+        <AuthTab.Screen 
+          name="Login" 
+          component={ Login } 
+          options={{ tabBarLabel: 'Đăng nhập' }}/>
+        <AuthTab.Screen 
+          name="Register" 
+          component={ Register } 
+          options={{ tabBarLabel: 'Đăng ký' }}/>
+      </AuthTab.Navigator>
     </View>
   )
 }
 
-export default Auth
+export { Auth }

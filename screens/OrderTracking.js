@@ -24,4 +24,4 @@ const OrderTracking = () => {
   )
 }
 
-export default OrderTracking
+export { OrderTracking }
