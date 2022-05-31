@@ -6,6 +6,7 @@ import { NewCollection } from '../components/Home/NewCollection'
 import { Popular } from '../components/Home/Popular'
 
 const Home = () => {
+  console.log('render Home screen')
   return (
     <View style={{
       flex: 1,
