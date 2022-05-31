@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigation } from '@react-navigation/native'
 import { View, Image, Text, useWindowDimensions, TouchableOpacity, Pressable } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import { OrderDesc } from './OrderDesc'
@@ -11,6 +12,7 @@ const ORDER_COMPLETED = 4
 const CANCELED = 5
 
 const Order = ({index, order, orders}) => {
+  const navigation = useNavigation()
   const { height, width } = useWindowDimensions()
   const getStateColors = () => {
     switch(order.state.stateCode) {
@@ -119,7 +121,8 @@ const Order = ({index, order, orders}) => {
               backgroundColor: 'white',
               elevation: 10
             }}
-            activeOpacity={0.8}>
+            activeOpacity={0.8}
+            onPress={() => navigation.navigate('OrderTracking')}>
             <Image 
               source={{uri: 'https://tinyurl.com/eh44227w'}}
               style={{

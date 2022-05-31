@@ -17,11 +17,11 @@ const Header = () => {
         flexDirection: 'row'
       }}> 
         <Image 
-          source={{uri: 'https://scontent.fhan14-2.fna.fbcdn.net/v/t39.30808-6/272853291_3155351404729261_5286117369667984707_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=wzcic0nd2X0AX_vcQTV&_nc_ht=scontent.fhan14-2.fna&oh=00_AT_J1M7rRcs8RvtFVbpHrW4mZ1NIUCd9ZwOUQVvz3ApVKQ&oe=6290B29F'}}
+          source={{uri: 'https://scontent.fhan3-5.fna.fbcdn.net/v/t1.15752-9/238596540_1224566681390021_1944068077931728533_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=ae9488&_nc_ohc=8sRZUKFAQ28AX9KZRF6&_nc_ht=scontent.fhan3-5.fna&oh=03_AVIlbrjfRig0x4qcH3dbdMg1rjjPAxzgtnys1v-NoIw_0A&oe=62BC5C0F'}}
           style={{
             width: '35%',
             height: '100%',
-            borderRadius: 15
+            borderRadius: 100
           }}/>
         <View style={{
           marginLeft: '8%',
