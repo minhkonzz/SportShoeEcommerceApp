@@ -27,6 +27,7 @@ const infos = [
 ]
 
 const Profile = () => {
+  console.log('render Profile screen')
   const { height, width } = useWindowDimensions()
   return (
     <FlatList 

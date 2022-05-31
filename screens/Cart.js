@@ -33,6 +33,7 @@ const cart = [
 ]
 
 const Cart = () => {
+  console.log('render Cart screen')
   const { height, width } = useWindowDimensions()
   return (
     <View style={{

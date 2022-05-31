@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigation } from '@react-navigation/native';
 import { View, TouchableOpacity, useWindowDimensions } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -10,6 +11,7 @@ import { Profile } from './Profile';
 const BottomTab = createBottomTabNavigator();
 
 const CartFloatTouchable = props => {
+  const navigation = useNavigation()
   return (
     <View style={{
       position: 'absolute',
@@ -25,7 +27,8 @@ const CartFloatTouchable = props => {
           justifyContent: 'center',
           alignItems: 'center'
         }}
-        activeOpacity={0.8}>
+        activeOpacity={0.8}
+        onPress={() => navigation.navigate('Cart')}>
         <Ionicons name='cart' color='white' size={props.dim.width < props.dim.height ? 28 : 33}/>
       </TouchableOpacity>
     </View>
