@@ -49,7 +49,11 @@ const wishlist = [
 const Wishlist = () => {
   const { height, width } = useWindowDimensions()
   return (
-    <FlatList 
+    <FlatList
+      contentContainerStyle={{
+        flex: 1,
+        backgroundColor: '#FCFCFC'
+      }} 
       showsVerticalScrollIndicator={false}
       data={[]}
       renderItem={null}
@@ -65,4 +69,4 @@ const Wishlist = () => {
   )
 }
 
-export default Wishlist
+export { Wishlist }

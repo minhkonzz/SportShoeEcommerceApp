@@ -94,6 +94,9 @@ const Orders = () => {
   const width = useWindowDimensions().width
   return (
     <FlatList 
+      contentContainerStyle={{
+        backgroundColor: '#FCFCFC'
+      }}
       showsVerticalScrollIndicator={false}
       data={[]}
       renderItem={null}
@@ -109,4 +112,4 @@ const Orders = () => {
   )
 }
 
-export default Orders
+export { Orders }
