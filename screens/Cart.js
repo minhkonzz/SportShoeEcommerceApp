@@ -119,4 +119,4 @@ const tpFontStyle = {
   fontSize: 15
 }
 
-export default Cart
+export { Cart }

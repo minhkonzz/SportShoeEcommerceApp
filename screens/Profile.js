@@ -36,7 +36,8 @@ const Profile = () => {
       ListHeaderComponent={
         <View style={{
           paddingTop: height / (width < height ? 26 : 12),
-          alignItems: 'center'
+          alignItems: 'center',
+          backgroundColor: '#FCFCFC'
         }}>
           <Header />
           { infos.map((info, index) => <InfoInput key={index} info={info}/>) }
@@ -86,4 +87,4 @@ const Profile = () => {
   )
 }
 
-export default Profile 
+export { Profile } 

@@ -9,7 +9,7 @@ const Home = () => {
   return (
     <View style={{
       flex: 1,
-      backgroundColor: '#F2F2F2'
+      backgroundColor: '#FCFCFC'
     }}>
       <FlatList 
         showsVerticalScrollIndicator={false} 
@@ -26,4 +26,4 @@ const Home = () => {
     </View>
   )
 }
-export default Home
+export { Home }
