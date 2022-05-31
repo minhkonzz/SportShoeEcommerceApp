@@ -91,6 +91,7 @@ let ods = [
 const SCREEN_NAME = 'Orders'
 
 const Orders = () => {
+  console.log('render Orders screen')
   const width = useWindowDimensions().width
   return (
     <FlatList 

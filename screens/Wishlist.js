@@ -47,6 +47,7 @@ const wishlist = [
 ]
 
 const Wishlist = () => {
+  console.log('render Wishlist screen')
   const { height, width } = useWindowDimensions()
   return (
     <FlatList
