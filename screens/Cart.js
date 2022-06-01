@@ -3,6 +3,7 @@ import { View, Text, FlatList, TouchableOpacity, useWindowDimensions } from 'rea
 import LinearGradient from 'react-native-linear-gradient'
 import { Header } from '../components/Orders/Header'
 import { Product } from '../components/Cart/Product'
+import { useNavigation } from '@react-navigation/native'
 
 const SCREEN_NAME = 'Cart'
 const cart = [
@@ -34,6 +35,7 @@ const cart = [
 
 const Cart = () => {
   console.log('render Cart screen')
+  const navigation = useNavigation()
   const { height, width } = useWindowDimensions()
   return (
     <View style={{
@@ -86,6 +88,7 @@ const Cart = () => {
           ]}>1.200.000đ</Text>
         </View>
         <TouchableOpacity 
+          onPress={()=>navigation.navigate('Checkout')}
           style={{
             height: height / (width < height ? 11 : 6.5),
             justifyContent: 'center',
