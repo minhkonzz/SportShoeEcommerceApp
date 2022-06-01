@@ -18,4 +18,4 @@ const ProductDetail = () => (
     }/>
 )
 
-export default ProductDetail
+export { ProductDetail }

@@ -7,6 +7,7 @@ import { Home } from './Home';
 import { Wishlist } from './Wishlist';
 import { Orders } from './Orders';
 import { Profile } from './Profile';
+import { Products } from './Products';
 
 const BottomTab = createBottomTabNavigator();
 
@@ -64,6 +65,13 @@ const Main = () => {
           options={{
             tabBarIcon: ({color, size}) => 
               <Ionicons name='home' size={size} color={color}/>
+          }}/>
+        <BottomTab.Screen 
+          name='Products' 
+          component={Products}
+          options={{
+            tabBarIcon: ({color, size}) => 
+              <Ionicons name= 'search-outline' size={size} color={color}/>
           }}/>
         <BottomTab.Screen 
           name='Wishlist' 
