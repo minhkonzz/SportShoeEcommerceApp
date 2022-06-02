@@ -1,10 +1,20 @@
-import React from 'react'
-import { View, Text, Image, TouchableOpacity, useWindowDimensions } from 'react-native'
+import React, {useRef} from 'react'
+import { View, Text, Animated, Image, TouchableOpacity, useWindowDimensions } from 'react-native'
 
 const Header = () => {
   const { height, width } = useWindowDimensions()
+  const bounce = useRef(new Animated.Value(0)).current;
+  React.useEffect(() => {
+    Animated.timing(bounce, {
+      toValue: 1,
+      delay: 2,
+      bounciness: 15,
+      useNativeDriver: true,
+      speed: 6,
+    }).start()
+}, [])
   return (
-      <View style={{
+      <Animated.View style={{
         width: width / (width < height ? 1.2 : 1.15),
         height: height / (width < height ? 5.5 : 2.5),
         backgroundColor: '#5F5E5E',
@@ -13,7 +23,8 @@ const Header = () => {
         alignItems: 'center',
         justifyContent: 'space-between',
         paddingHorizontal: width / (width < height ? 18 : 16),
-        marginBottom: height / (width < height ? 50 : 20) 
+        marginBottom: height / (width < height ? 50 : 20),
+        transform: [{ scale: bounce}]
       }}>
         <Image 
           source={{uri: 'https://tinyurl.com/2p899ms8'}}
@@ -66,7 +77,7 @@ const Header = () => {
               height: width < height ? 18 : 24
             }}/>
         </TouchableOpacity>
-      </View>
+      </Animated.View>
   )
 }
 
