@@ -64,7 +64,9 @@ const Wishlist = () => {
             title={TITLE}
             imageRight={HEADER_IMAGE}
             screen={SCREEN_NAME}/>
-          { wishlist.map((product, index) => <Product key={index} product={product}/>) }
+          { wishlist.map((product, index) => 
+              <Product key={index} index={index} product={product}/>
+          ) }
         </View>
       }/>
   )
