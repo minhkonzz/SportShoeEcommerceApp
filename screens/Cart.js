@@ -1,10 +1,11 @@
-import React from 'react'
-import { View, Text, FlatList, TouchableOpacity, useWindowDimensions } from 'react-native'
+import React, {useRef} from 'react'
+import { View, Text, FlatList, LogBox, Animated, TouchableOpacity, useWindowDimensions } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import { Header } from '../components/Orders/Header'
 import { Product } from '../components/Cart/Product'
 import { useNavigation } from '@react-navigation/native'
-
+LogBox.ignoreLogs(['Warning: ...']);
+LogBox.ignoreAllLogs();
 const SCREEN_NAME = 'Cart'
 const cart = [
   {
@@ -37,6 +38,18 @@ const Cart = () => {
   console.log('render Cart screen')
   const navigation = useNavigation()
   const { height, width } = useWindowDimensions()
+  const fadeText = useRef(new Animated.Value(0)).current;
+  React.useEffect(() => {
+    Animated.parallel([
+      Animated.timing(
+        fadeText,{
+          toValue: 1,
+          useNativeDriver: true,
+          duration: 1000,
+        }
+      ),
+    ]).start()
+  }, [])
   return (
     <View style={{
       flex: 1, 
@@ -56,9 +69,10 @@ const Cart = () => {
                 title={'Giỏ hàng của tôi'}
                 imageRight={'https://tinyurl.com/5drx39ej'} 
                 screen={SCREEN_NAME}/>
-              <Text style={{ 
-                fontFamily: 'Montserrat-Bold'
-              }}>4 sản phẩm</Text>
+              <Animated.Text style={{ 
+                fontFamily: 'Montserrat-Bold',
+                opacity: fadeText
+              }}>4 sản phẩm</Animated.Text>
               {
                 cart.map((product, index) => <Product key={index} product={product}/>)
               }

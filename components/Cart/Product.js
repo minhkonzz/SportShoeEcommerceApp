@@ -1,6 +1,7 @@
-import React from 'react'
-import { View, Image, Text, TouchableOpacity, useWindowDimensions } from 'react-native'
-
+import React, { useRef } from 'react'
+import { View, Image, Text, LogBox, Animated, TouchableOpacity, useWindowDimensions } from 'react-native'
+LogBox.ignoreLogs(['Warning: ...']);
+LogBox.ignoreAllLogs();
 const AdjustAmountButton = props => {
   const { height, width } = useWindowDimensions()
   return (
@@ -24,8 +25,19 @@ const AdjustAmountButton = props => {
 
 const Product = ({product}) => {
   const { height, width } = useWindowDimensions()
+  const slidefromRight = useRef(new Animated.Value(500)).current;
+  React.useEffect(() => {
+    Animated.stagger(500, [
+      Animated.timing(
+        slidefromRight,{
+          toValue: 0,
+          duration: 1000,
+        }
+      ),
+    ]).start()
+  }, [])
   return (
-    <View style={{
+    <Animated.View style={{
       width: width / (width < height ? 1.2 : 1.15),
       height: height / (width < height ? 6 : 2.5),
       borderRadius: 10,
@@ -34,8 +46,9 @@ const Product = ({product}) => {
       padding: 8,
       marginTop: 25,
       elevation: 5,
-      alignSelf: 'center'
-    }}>
+      alignSelf: 'center',
+      marginLeft: slidefromRight
+      }}>
       <View style={{
         flex: width < height ? 4 : 3,
         justifyContent: 'center',
@@ -43,7 +56,7 @@ const Product = ({product}) => {
         paddingRight: 10,
       }}>
         <Image 
-          source={{uri: 'http://surl.li/bumdd'}}
+          source={{uri: 'https://scontent.fhan15-2.fna.fbcdn.net/v/t1.15752-9/281298551_550377153271714_8055113135333945283_n.png?_nc_cat=111&ccb=1-7&_nc_sid=ae9488&_nc_ohc=eCgl4qcGnsMAX-hMXmZ&_nc_ht=scontent.fhan15-2.fna&oh=03_AVKdg0f40vldc5sarmmAvoj0qNiVkJfYiP7OK-wiwRyUFQ&oe=62BE705F'}}
           style={{
             width: width < height ? 140 : 220,
             height: width < height ? 60 : 100
@@ -107,7 +120,7 @@ const Product = ({product}) => {
             textColor={'white'}/>
         </View>
       </View>
-    </View>
+    </Animated.View>
   )
 }
 
