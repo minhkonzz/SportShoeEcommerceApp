@@ -1,20 +1,42 @@
-import React from 'react'
-import { View, Text, Image, useWindowDimensions } from 'react-native'
+import React, {useRef} from 'react'
+import { View, Text, Image, Animated, useWindowDimensions } from 'react-native'
 
 const BasicInfo = props => {
   console.log(props.infoAmount)
   const { height, width } = useWindowDimensions()
+  const slidefromRight = useRef(new Animated.Value(500)).current;
+  const slidefromLeft = useRef(new Animated.Value(-500)).current;
+  React.useEffect(() => {
+    Animated.stagger(300, [
+      Animated.timing(
+        slidefromRight,{
+          toValue: 0,
+          delay: 1,
+          useNativeDriver: true,
+          duration: 1000,
+        }
+      ),
+      Animated.timing(
+        slidefromLeft,{
+          toValue: 0,
+          useNativeDriver: true,
+          duration: 1000,
+        }
+      ),
+    ]).start()
+  }, [])
   return (
     <View>
       <View style={{
         flexDirection: 'row',
         justifyContent: 'space-between',
         height: 16
-      }}>
-        <View style={{
-          flexDirection: 'row',
-          alignItems: 'center'
         }}>
+        <Animated.View style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          transform: [{ translateX: slidefromLeft}]
+          }}>
           <View style={[{
             width: 12,
             height: 12,
@@ -37,20 +59,22 @@ const BasicInfo = props => {
               marginLeft: 5
             }}>{props.info.title}</Text>
           </View>
-        </View>
-        <Text style={{
+        </Animated.View>
+        <Animated.Text style={{
           fontFamily: 'Montserrat-Medium',
-          fontSize: 12
-        }}>20-09-2022</Text>
+          fontSize: 12,
+          transform: [{ translateX: slidefromRight}]
+        }}>20-09-2022</Animated.Text>
       </View>
       {
         props.index == props.infoAmount - 1 ? 
         <View /> :
-        <View style={{
+        <Animated.View style={{
           width: 2,
           height: 25,
           backgroundColor: '#5f5e5e',
-          marginLeft: 5
+          marginLeft: 5,
+          transform: [{ translateX: slidefromLeft}]
         }}/>
       }
     </View>

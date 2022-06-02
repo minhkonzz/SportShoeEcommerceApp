@@ -1,5 +1,5 @@
-import React from 'react'
-import { View, Text, Image, useWindowDimensions } from 'react-native'
+import React, {useRef} from 'react'
+import { View, Text, Animated, Image, useWindowDimensions } from 'react-native'
 
 const status = [
   'Đã tiếp nhận',
@@ -10,18 +10,41 @@ const status = [
 
 const OrderState = ({item, index, statesCompleted, statesAmount}) => {
   const { height, width } = useWindowDimensions()
+  const slidefromLeft = useRef(new Animated.Value(-500)).current;
+  const slidefromRight = useRef(new Animated.Value(500)).current;
+  React.useEffect(() => {
+    Animated.stagger(300, [
+      Animated.timing(
+        slidefromRight,{
+          toValue: 0,
+          delay: 1,
+          useNativeDriver: true,
+          duration: 1000,
+        }
+      ),
+      Animated.timing(
+        slidefromLeft,{
+          toValue: 0,
+          delay: 1,
+          useNativeDriver: true,
+          duration: 1000,
+        }
+      ),
+    ]).start()
+  }, [])
   return (
     <View style={{
       height: height / (width < height ? 8.25 : 3.9),
       flexDirection: 'row'
     }}>
       <View style={{ flex: 5 }}>
-        <View style={{
+        <Animated.View style={{
           width: '85%',
           height: '50%',
           justifyContent: 'center',
-          alignItems: 'flex-end'
-        }}>
+          alignItems: 'flex-end',
+          transform: [{ translateX: slidefromLeft}]
+          }}>
           <Text style={{
             fontFamily: 'Montserrat-Medium',
             fontSize: width < height ? 11 : 14,
@@ -36,9 +59,9 @@ const OrderState = ({item, index, statesCompleted, statesAmount}) => {
           }}>
             { index < statesCompleted ? item.time : '' }
           </Text>
-        </View>
+        </Animated.View>
       </View>
-      <View style={{ flex: 1, alignItems: 'center' }}>
+      <Animated.View style={{ flex: 1, alignItems: 'center' }}>
         <View style={[
           {
             width: 16,
@@ -58,11 +81,12 @@ const OrderState = ({item, index, statesCompleted, statesAmount}) => {
             backgroundColor: index === statesAmount-1 ? '#FCFCFC' : (index < statesCompleted-1 ? '#5F5E5E' : '#E4E4E4')
           }
         ]}/>
-      </View>
-      <View style={{
+      </Animated.View>
+      <Animated.View style={{
         flex: 7,
-        paddingLeft: '4%'
-      }}>
+        paddingLeft: '4%',
+        transform: [{ translateX: slidefromRight}]
+        }}>
         <View style={{
           width: '16%',
           height: width < height ? '32%' : '45%',
@@ -81,7 +105,7 @@ const OrderState = ({item, index, statesCompleted, statesAmount}) => {
           color: '#5F5E5E',
           marginTop: '3%'
         }}>{status[index]}</Text>
-      </View>
+      </Animated.View>
     </View>
   )
 }
