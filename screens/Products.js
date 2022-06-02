@@ -2,8 +2,7 @@ import React from 'react'
 import { View, FlatList, useWindowDimensions } from 'react-native'
 import { Tab } from '../components/Products/Tab'
 import { Product } from '../components/Products/Product'
-// import { Header } from '../../components/Orders/Header'
-
+import { Header } from '../components/Orders/Header'
 const brands = [
   {
     logo: 'https://tinyurl.com/bdez2vj7',
@@ -46,7 +45,6 @@ const products = [
   }
 ]
 
-const SCREEN_NAME = 'Products'
 const HEADER_IMAGE = 'https://tinyurl.com/2s4bb5sh'
 const TITLE = 'Sản phẩm'
 
@@ -63,10 +61,9 @@ const Products = () => {
       renderItem={null}
       ListHeaderComponent={
         <View>
-          {/* <Header 
+          <Header 
             title={TITLE} 
-            imageRight={HEADER_IMAGE}
-            screen={SCREEN_NAME}/> */}
+            imageRight={HEADER_IMAGE}/>
           <View style={{
             flexDirection: 'row',
             marginTop: 10,

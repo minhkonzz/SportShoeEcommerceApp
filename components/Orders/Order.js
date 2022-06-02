@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { useNavigation } from '@react-navigation/native'
-import { View, Image, Text, useWindowDimensions, TouchableOpacity, Pressable } from 'react-native'
+import { View, Image, Text, Animated, useWindowDimensions, TouchableOpacity, Pressable } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import { OrderDesc } from './OrderDesc'
 
@@ -13,6 +13,15 @@ const CANCELED = 5
 
 const Order = ({index, order, orders}) => {
   const navigation = useNavigation()
+  const odsAnim = useRef(new Animated.Value(400)).current;
+  React.useEffect(() => {
+    Animated.stagger(500, [
+      Animated.timing(odsAnim, {
+        toValue: 0,
+        duration: 1000
+      })
+    ]).start()
+  }, [])
   const { height, width } = useWindowDimensions()
   const getStateColors = () => {
     switch(order.state.stateCode) {
@@ -25,14 +34,18 @@ const Order = ({index, order, orders}) => {
     }
   }
   return (
-    <View style={{ marginBottom: height / (width < height ? 70 : 50)}}>
+    <Animated.View style={{ 
+      marginBottom: height / (width < height ? 70 : 50),
+      marginLeft: odsAnim
+      }}>
       {
         orders[index - (index > 0 ? 1 : 0)].month != order.month || index == 0 ?
         <Text style={{
           fontFamily: 'Montserrat-Bold',
           fontSize: 16,
-          marginTop: height / (width < height ? 45 : 30)
-        }}>{`Tháng ${order.month}`}</Text> : null 
+          marginTop: height / (width < height ? 45 : 30),
+          }}>{`Tháng ${order.month}`}
+        </Text> : null 
       }
       <View style={{
         width: width / 1.16,
@@ -41,8 +54,8 @@ const Order = ({index, order, orders}) => {
         borderRadius: 18,
         paddingHorizontal: 16,
         paddingVertical: 6,
-        marginTop: width < height ? 15 : 18
-      }}>
+        marginTop: width < height ? 15 : 18,
+        }}>
         <View style={{
           flex: 2, 
           flexDirection: 'row',
@@ -65,7 +78,7 @@ const Order = ({index, order, orders}) => {
               useAngle={true}
               angle={145}>
               <Image 
-                source={{uri: 'https://tinyurl.com/49unfs78'}}
+                source={{uri: 'https://scontent.fhan15-2.fna.fbcdn.net/v/t1.15752-9/278897894_1164049447695513_4791849670458686083_n.png?stp=cp0_dst-png&_nc_cat=100&ccb=1-7&_nc_sid=ae9488&_nc_ohc=fA9xvFXLI9MAX_jZM3b&tn=SjqDQmKiiUESt38z&_nc_ht=scontent.fhan15-2.fna&oh=03_AVJx0mIeFsixoNIPnyflbQ6fcUUV8pUMxI7dhMl0X-wFpw&oe=62BC1C78'}}
                 style={{
                   width: width < height ? 16 : 20,
                   height: width < height ? 16 : 20
@@ -132,7 +145,7 @@ const Order = ({index, order, orders}) => {
           </TouchableOpacity>
         </View>
       </View>
-    </View>
+    </Animated.View>
   )
 }
 

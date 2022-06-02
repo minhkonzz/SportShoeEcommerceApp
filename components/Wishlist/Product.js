@@ -1,10 +1,23 @@
-import React from 'react'
-import { View, Text, Image, TouchableOpacity, useWindowDimensions } from 'react-native'
-
+import React, { useRef } from 'react'
+import { View, Text, LogBox, Image, Animated, TouchableOpacity, useWindowDimensions } from 'react-native'
+LogBox.ignoreLogs(['Warning: ...']);
+LogBox.ignoreAllLogs();
 const Product = props => {
   const { height, width } = useWindowDimensions()
+  const slidefromRight = useRef(new Animated.Value(400)).current;
+  React.useEffect(() => {
+    Animated.stagger(5000, [
+      Animated.timing(
+        slidefromRight,{
+          toValue: 0,
+          delay: props.index,
+          duration: 1000,
+        }
+      )
+    ]).start()
+  }, [])
   return (
-    <View style={{
+    <Animated.View style={{
       width: width / 1.16,
       height: height / (width < height ? 6.5 : 2.8),
       backgroundColor: 'white',
@@ -14,7 +27,8 @@ const Product = props => {
       borderBottomRightRadius: 20,
       flexDirection: 'row',
       elevation: 7,
-      marginVertical: height / (width < height ? 70 : 25)
+      marginVertical: height / (width < height ? 70 : 25),
+      marginLeft: slidefromRight
     }}>
       <View style={{
         flex: width < height ? 6 : 3,
@@ -24,7 +38,7 @@ const Product = props => {
         alignItems: 'center'
       }}>
         <Image 
-          source={{uri: 'http://surl.li/bumdd'}}
+          source={{uri: 'https://scontent.fhan15-1.fna.fbcdn.net/v/t1.15752-9/279472069_582436386395177_7456601121581054285_n.png?_nc_cat=101&ccb=1-7&_nc_sid=ae9488&_nc_ohc=ks0sWKdReDAAX-YeJBj&tn=SjqDQmKiiUESt38z&_nc_ht=scontent.fhan15-1.fna&oh=03_AVKSCHA1UkTcZupIufTgsQRVmgSe-j6E4UyfAiGnobfQ5g&oe=62BDF141'}}
           style={{
             width: width < height ? 90 : 110,
             height: width < height ? 50 : 60
@@ -133,7 +147,7 @@ const Product = props => {
           <Text style={{ color: '#fcfcfc' }}>x</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </Animated.View>
   )
 }
 

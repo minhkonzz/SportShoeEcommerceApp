@@ -1,12 +1,27 @@
-import React from 'react'
-import { View, Text, TextInput, Image, useWindowDimensions } from 'react-native'
+import React, {useRef} from 'react'
+import { View, Text, TextInput, Animated, Image, useWindowDimensions } from 'react-native'
 
 const InfoInput = props => {
   const { height, width } = useWindowDimensions()
+  const bounce = useRef(new Animated.Value(0)).current;
+  React.useEffect(() => {
+    Animated.stagger(300, [
+      Animated.spring(
+        bounce,{
+          toValue: 1,
+          delay: 2,
+          bounciness: 15,
+          useNativeDriver: true,
+          speed: 6,
+        }
+      ),
+    ]).start()
+  }, [])
   return (
-      <View style={{
+      <Animated.View style={{
         marginTop: height / (width < height ? 38 : 14), 
-        width: width / (width < height ? 1.2 : 1.15) 
+        width: width / (width < height ? 1.2 : 1.15),
+        transform: [{ scale: bounce}]
       }}>
         <View style={{
           flexDirection: 'row',
@@ -34,7 +49,7 @@ const InfoInput = props => {
           fontSize: width < height ? 16 : 19,
           color: '#5f5e5e'
         }}/>
-      </View>
+      </Animated.View>
   )
 }
 

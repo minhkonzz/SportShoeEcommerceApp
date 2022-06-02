@@ -102,7 +102,7 @@ const Orders = () => {
       data={[]}
       renderItem={null}
       ListHeaderComponent={
-        <View style={{ paddingHorizontal: width / 14 }}>
+        <View style={{ paddingHorizontal: width / 14, backgroundColor: '#fcfcfc' }}>
           <Header 
             title={'Đơn hàng của tôi'}
             imageRight={'https://tinyurl.com/5drx39ej'}

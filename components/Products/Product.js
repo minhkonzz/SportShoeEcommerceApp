@@ -1,8 +1,20 @@
-import React from 'react'
-import { View, Text, Image, TouchableOpacity, useWindowDimensions } from 'react-native'
+import React, {useRef} from 'react'
+import { View, Text, Image, Animated, TouchableOpacity, useWindowDimensions } from 'react-native'
 
 const Product = props => {
   const { height, width } = useWindowDimensions()
+  const prodAnim = useRef(new Animated.Value(0)).current;
+  React.useEffect(() => {
+    Animated.parallel( [
+    Animated.spring(prodAnim, {
+      toValue: 1,
+      delay: 2,
+      bounciness: 15,
+      useNativeDriver: true,
+      speed: 6,
+    })
+  ]).start()
+}, [])
   return (
     <View style={{
       width: width / 2.5,
@@ -10,11 +22,12 @@ const Product = props => {
       marginLeft: props.index % 2 == 0 ? 0 : 23.5,
       marginTop: props.index % 2 == 0 ? (props.index > 0 ? 20 : 50) : (props.index > 1 ? 50 : 80),
     }}>
-      <View style={{
+      <Animated.View style={{
         flex: 3,
         backgroundColor: '#EEEEEE',
-        borderRadius: 25
-      }}>
+        borderRadius: 25,
+        transform: [{scale: prodAnim}]
+        }}>
         <View style={{ flex: 5 }}>
           <Image 
             source={{uri: props.product.image}}
@@ -74,7 +87,7 @@ const Product = props => {
               }}/>
           </TouchableOpacity>
         </View>
-      </View>
+      </Animated.View>
       <View style={{
         flex: 1, 
         alignItems: 'center'

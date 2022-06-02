@@ -17,11 +17,12 @@ const CartFloatTouchable = props => {
     <View style={{
       position: 'absolute',
       bottom: 75,
-      right: 22
+      right: 22,
     }}>
       <TouchableOpacity 
         style={{
           width: props.dim.width / (props.dim.width < props.dim.height ? 6.1 : 10),
+          elevation: 8,
           height: props.dim.height / (props.dim.width < props.dim.height ? 11.5 : 5.5),
           borderRadius: 1000,
           backgroundColor: '#5F5E5E',
@@ -85,7 +86,7 @@ const Main = () => {
           component={Orders}
           options={{
             tabBarIcon: ({color, size}) => 
-              <Ionicons name='home' size={size} color={color}/>
+              <Ionicons name='basket' size={size} color={color}/>
           }}/>
         <BottomTab.Screen 
           name='Profile' 

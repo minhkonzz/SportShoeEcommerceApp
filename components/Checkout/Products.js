@@ -1,16 +1,29 @@
-import React from 'react'
-import { View, Text, Image, useWindowDimensions } from 'react-native'
+import React, {useRef} from 'react'
+import { View, Text, Animated, Image, useWindowDimensions } from 'react-native'
 import { Product } from './Product'
 
 const Products = () => {
   const { height, width } = useWindowDimensions()
+  const bounceAnim = useRef(new Animated.Value(0)).current;
+  React.useEffect(() => {
+    Animated.spring(
+      bounceAnim, {
+        toValue: 1,
+        delay: 2,
+        bounciness: 15,
+        useNativeDriver: true,
+        speed: 6,
+      }
+    ).start()
+  }, [])
   return (
-    <View style={{
+    <Animated.View style={{
       marginTop: height / (width < height ? 25 : 12),
       width: width / (width < height ? 1.15 : 1.1),
       borderRadius: 10,
       backgroundColor: 'white',
-      elevation: 5
+      elevation: 5,
+      transform: [{ scale: bounceAnim}]
     }}>
       <View style={{
         flexDirection: 'row',
@@ -38,7 +51,7 @@ const Products = () => {
         <Product />
         <Product />
       </View>
-    </View>
+    </Animated.View>
   )
 }
 
