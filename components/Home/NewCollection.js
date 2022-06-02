@@ -1,5 +1,5 @@
-import React from 'react'
-import { View, Text, FlatList, useWindowDimensions } from 'react-native'
+import React, { useRef } from 'react'
+import { View, Text, Animated, FlatList, useWindowDimensions } from 'react-native'
 import { NewCollectionItem } from './NewCollectionItem'
 
 const data = [
@@ -22,13 +22,37 @@ const data = [
 
 const NewCollection = () => {
   const { height, width } = useWindowDimensions()
+  const slidefromRight = useRef(new Animated.Value(400)).current;
+  const fadeOutText = useRef(new Animated.Value(0)).current;
+  React.useEffect(() => {
+    Animated.parallel([
+      Animated.timing(
+        slidefromRight,{
+          toValue: 0,
+          useNativeDriver: true,
+          duration: 1000,
+        }
+      ),
+      Animated.timing(
+        fadeOutText,{
+          toValue: 1,
+          useNativeDriver: true,
+          duration: 1000,
+        }
+      ),
+    ]).start()
+  }, [])
   return (
-    <View style={{ marginTop: width/( width < height ?  28 :  10) }}>
-      <Text style={{
+    <Animated.View style={{ 
+      marginTop: width/( width < height ?  28 :  10),
+      transform: [{ translateX: slidefromRight}]
+     }}>
+      <Animated.Text style={{
         marginLeft: width/( width < height ? 15 : 20), 
         fontSize: width < height ? 20 : 28,
-        fontWeight: 'bold'
-      }}>Bộ sưu tập mới</Text>
+        fontWeight: 'bold',
+        opacity: fadeOutText
+      }}>Bộ sưu tập mới</Animated.Text>
       <FlatList
         contentContainerStyle={{
           height: width < height ? height / 1.88 : height * 1.18,  
@@ -39,7 +63,7 @@ const NewCollection = () => {
         horizontal={true}
         data={data}
         renderItem={({item, index}) => <NewCollectionItem item={item} index={index}/>}/>
-    </View>
+    </Animated.View>
   )
 }
 

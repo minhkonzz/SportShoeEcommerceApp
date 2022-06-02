@@ -1,7 +1,26 @@
-import React from 'react'
-import { View, Text, Image, useWindowDimensions } from 'react-native'
+import React, { useRef } from 'react'
+import { View, Text, Image, Animated, useWindowDimensions } from 'react-native'
 
 const Header = () => {
+  const fadeOutText = useRef(new Animated.Value(0)).current;
+  const avartarAnim = useRef(new Animated.Value(0)).current;
+  React.useEffect(() => {
+    Animated.parallel( [
+      Animated.timing(fadeOutText, {
+        toValue: 1,
+        delay: 2,
+        useNativeDriver: true,
+        duration: 1000
+      }),
+      Animated.spring(avartarAnim, {
+        toValue: 1,
+        bounciness: 20,
+        useNativeDriver: true,
+        speed: 8,
+      })
+    ]).start()
+  }, [])
+  console.log('Animated Active')
   const { height, width } = useWindowDimensions()
   return (
     <View style={{
@@ -16,26 +35,27 @@ const Header = () => {
         height: width < height ? '52%' : '57%',
         flexDirection: 'row'
       }}> 
-        <Image 
+        <Animated.Image 
           source={{uri: 'https://scontent.fhan3-5.fna.fbcdn.net/v/t1.15752-9/238596540_1224566681390021_1944068077931728533_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=ae9488&_nc_ohc=8sRZUKFAQ28AX9KZRF6&_nc_ht=scontent.fhan3-5.fna&oh=03_AVIlbrjfRig0x4qcH3dbdMg1rjjPAxzgtnys1v-NoIw_0A&oe=62BC5C0F'}}
           style={{
             width: '35%',
             height: '100%',
-            borderRadius: 100
+            borderRadius: 100,
+            transform: [{scale: avartarAnim }]
           }}/>
         <View style={{
           marginLeft: '8%',
           paddingTop: '4%'
         }}>
-          <Text style={{
+          <Animated.Text style={{
             fontSize: width < height ? 13 : 19
-          }}>Xin chào</Text>
-          <Text style={{
+          }}>Xin chào</Animated.Text>
+          <Animated.Text style={{
             fontSize: width < height ? 14 : 21,
             fontWeight: 'bold',
             fontFamily: 'Poppins-Bold',
             marginTop: '5%'
-          }}>Minh Phạm</Text>
+          }}>Minh Phạm</Animated.Text>
         </View>
       </View>
       <Image 
