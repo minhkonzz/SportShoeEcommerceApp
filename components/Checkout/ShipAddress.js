@@ -1,17 +1,30 @@
-import React from 'react'
-import { View, Image, Text, TouchableOpacity, useWindowDimensions } from 'react-native'
+import React, {useRef} from 'react'
+import { View, Image, Text, Animated, TouchableOpacity, useWindowDimensions } from 'react-native'
 
 const ShipAddress = () => {
   const { height, width } = useWindowDimensions()
+  const bounceAnim = useRef(new Animated.Value(0)).current;
+  React.useEffect(() => {
+    Animated.spring(
+      bounceAnim, {
+        toValue: 1,
+        delay: 2,
+        bounciness: 15,
+        useNativeDriver: true,
+        speed: 6,
+      }
+    ).start()
+  }, [])
   return (
-    <View style={{
+    <Animated.View style={{
       width: width / (width < height ? 1.15 : 1.1),
       backgroundColor: 'white', 
       padding: 12, 
       justifyContent: 'space-between', 
       borderRadius: 10,
       marginTop: height / (width < height ? 30 : 20),
-      elevation: 5
+      elevation: 5,
+      transform: [{ scale: bounceAnim }]
     }}>
       <View>
         <View>
@@ -68,7 +81,7 @@ const ShipAddress = () => {
           }}>Thêm ghi chú</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </Animated.View>
   )
 }
 
