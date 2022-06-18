@@ -101,5 +101,6 @@ I.Windown
       -Nếu mọi thứ được thiết lập chính xác, bạn sẽ sớm thấy ứng dụng mới của mình chạy trong trình giả lập Android.
         +npx react-native run-androidlà một cách để chạy ứng dụng của bạn - bạn cũng có thể chạy ứng dụng trực tiếp từ bên trong Android Studio.
  
-  
+  ![image](https://user-images.githubusercontent.com/77525237/174433075-713a8876-62f8-46fe-bd02-0880b270c02b.png)
+
       
