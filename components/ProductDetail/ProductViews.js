@@ -1,6 +1,6 @@
 import React from 'react'
-import { View, Text, Image, Pressable, useWindowDimensions } from 'react-native'
-import Swiper from 'react-native-swiper'
+import { View, Text, Image, StyleSheet } from 'react-native'
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
 const productImages = [
   'http://surl.li/bumdd',
@@ -8,79 +8,22 @@ const productImages = [
   'http://surl.li/bumdd'
 ]
 
-const ProductViews = () => {
-  const { height, width } = useWindowDimensions()
+export function ProductViews() {
   return (
-    <View style={{
-      height: height / (width < height ? 1.8 : 1.1),
-      position: 'relative'
-    }}>
-      <View style={{
-        width: width < height ? '72%' : '60%',
-        height: width < height ? '70%' : '95%',
-        backgroundColor: '#5f5e5e',
-        alignSelf: 'flex-end',
-        borderBottomLeftRadius: 500, 
-        position: 'absolute'
-      }}/>
-      <View style={{
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        height: height / (width < height ? 10 : 4.5),
-        paddingLeft: width / 20
-      }}>
-        <Pressable>
-          <Image 
-            source={{uri: 'https://tinyurl.com/3u6e3wej'}}
-            style={{
-              width: 15,
-              height: 15
-            }}/>
-        </Pressable>
-        <View style={{ 
-          alignItems: 'center',
-          marginLeft: width / 15,
-          marginTop: height / 40
-        }}>
-          <Image 
-            source={{uri: 'https://tinyurl.com/4c9pm9kr'}}
-            style={{
-              width: width < height ? 45 : 55,
-              height: width < height ? 45 : 55
-            }}/>
-          <Text style={{
-            fontSize: width < height ? 11 : 14,
-            fontFamily: 'Montserrat-Medium',
-            color: '#fcfcfc'
-          }}>Adidas</Text>
+    <View style={styles.container}>
+      <View style={styles.decor}/>
+      <View style={styles.header}>
+        <Ionicons name='chevron-back' size={28}/>
+        <View style={styles.brand}>
+          <Image source={{uri: 'https://tinyurl.com/4c9pm9kr'}} style={styles.brandLogo}/>
+          <Text style={styles.brandName}>Adidas</Text>
         </View>
-        <View style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          borderTopLeftRadius: 50,
-          borderBottomLeftRadius: 50,
-          backgroundColor: 'white',
-          paddingVertical: height / (width < height ? 115 : 40),
-          paddingHorizontal: width / 35
-        }}>
-          <Image 
-            source={{uri: 'https://tinyurl.com/dvdmxecx'}}
-            style={{
-              width: width < height ? 20 : 26,
-              height: width < height ? 20 : 26
-            }}/>
-          <Text style={{
-            paddingVertical: width < height ? 1 : 5,
-            paddingHorizontal: width < height ? 6 : 11,
-            backgroundColor: 'red',
-            borderRadius: width < height ? 10 : 30,
-            marginLeft: width < height ? 10 : 12,
-            color: 'white'
-          }}>2</Text>
+        <View style={styles.toCart}>
+          <Ionicons name='cart' size={24}/>
+          <Text style={styles.cartAmount}>2</Text>
         </View>
       </View>
-      <Swiper activeDotColor='#5f5e5e'>
+      {/* <Swiper activeDotColor='#5f5e5e'>
         {
           productImages.map((source, index) => 
             <View
@@ -101,9 +44,60 @@ const ProductViews = () => {
             </View>
           )
         }
-      </Swiper>
+      </Swiper> */}
     </View>
   )
 }
 
-export { ProductViews }
+const styles = StyleSheet.create({
+  container: {
+    height: 400,
+    position: 'relative'
+  }, 
+  decor: {
+    width: '72%',
+    height: '70%',
+    backgroundColor: '#5f5e5e',
+    alignSelf: 'flex-end',
+    borderBottomLeftRadius: 500, 
+    position: 'absolute'
+  }, 
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    height: 80,
+    paddingLeft: 24
+  },
+  brand: {
+    alignItems: 'center',
+    marginLeft: 25,
+    marginTop: 25
+  },
+  brandLogo: {
+    width: 45,
+    height: 45
+  },
+  brandName: {
+    fontSize: 11,
+    fontFamily: 'Montserrat-Medium',
+    color: '#fcfcfc'
+  },
+  toCart: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderTopLeftRadius: 50,
+    borderBottomLeftRadius: 50,
+    backgroundColor: 'white',
+    paddingVertical: 8,
+    paddingHorizontal: 12
+  },
+  cartAmount: {
+    paddingVertical: 1,
+    paddingHorizontal: 6,
+    backgroundColor: 'red',
+    borderRadius: 10,
+    marginLeft: 10,
+    color: 'white'
+  }
+})

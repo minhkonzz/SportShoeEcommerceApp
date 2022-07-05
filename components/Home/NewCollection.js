@@ -1,5 +1,5 @@
-import React, { useRef } from 'react'
-import { View, Text, Animated, FlatList, useWindowDimensions } from 'react-native'
+import React, { useEffect, useRef } from 'react'
+import { Animated, FlatList, StyleSheet } from 'react-native'
 import { NewCollectionItem } from './NewCollectionItem'
 
 const data = [
@@ -20,11 +20,12 @@ const data = [
   }
 ]
 
-const NewCollection = () => {
-  const { height, width } = useWindowDimensions()
+export function NewCollection() {
+
   const slidefromRight = useRef(new Animated.Value(400)).current;
   const fadeOutText = useRef(new Animated.Value(0)).current;
-  React.useEffect(() => {
+
+  useEffect(() => {
     Animated.parallel([
       Animated.timing(
         slidefromRight,{
@@ -42,22 +43,22 @@ const NewCollection = () => {
       ),
     ]).start()
   }, [])
+
   return (
-    <Animated.View style={{ 
-      marginTop: width/( width < height ?  28 :  10),
-      transform: [{ translateX: slidefromRight}]
-     }}>
-      <Animated.Text style={{
-        marginLeft: width/( width < height ? 15 : 20), 
-        fontSize: width < height ? 20 : 28,
-        fontWeight: 'bold',
-        opacity: fadeOutText
-      }}>Bộ sưu tập mới</Animated.Text>
+    <Animated.View style={[
+      styles.container,
+      { 
+        transform: [{ translateX: slidefromRight }] 
+      }
+     ]}>
+      <Animated.Text style={[
+        styles.title,
+        { 
+          opacity: fadeOutText
+        }
+      ]}>Bộ sưu tập mới</Animated.Text>
       <FlatList
-        contentContainerStyle={{
-          height: width < height ? height / 1.88 : height * 1.18,  
-          alignItems: 'center'
-        }}
+        contentContainerStyle={styles.listContainer}
         key={({item, index}) => index}
         showsHorizontalScrollIndicator={false} 
         horizontal={true}
@@ -67,4 +68,17 @@ const NewCollection = () => {
   )
 }
 
-export { NewCollection }
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 40
+  },
+  title: {
+    marginLeft: 24, 
+    fontSize: 20, 
+    fontFamily: 'Montserrat-Bold'
+  },
+  listContainer: {
+    height: 420, 
+    alignItems: 'center'
+  }
+})

@@ -1,35 +1,34 @@
 import React from 'react'
-import { View, Text, Image, useWindowDimensions } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
-const OrderDesc = props => {
-  const { height, width } = useWindowDimensions()
+export function OrderDesc(props) {
   return (
-    <View style={{
-      flexDirection: 'row',
-      alignItems: 'center',
-      paddingLeft: 8
-    }}>
-      <Image 
-        source={{uri: props.desc.icon}}
-        style={{
-          width: width < height ? 17 : 19, 
-          height: width < height ? 17 : 19
-        }}/>
-      <Text style={{ 
-        marginLeft: width < height ? 10 : 14,
-        fontSize: width < height ? 12 : 15,
-        fontFamily: 'Montserrat-Medium',
-        color: '#9A9A9A'
-      }}>{props.desc.desc}</Text>
-      <Text style={{ 
-        marginLeft: width / (width < height ? 30 : 18),
-        fontSize: width < height ? 12 : 15 ,
-        fontFamily: 'Montserrat-Bold',
-        alignSelf: 'flex-end',
-        color: '#9A9A9A'
-      }}>{props.desc.descVal}</Text>
+    <View style={styles.container}>
+      <Ionicons name={props.desc.icon} size={17} color='#5f5e5e'/>
+      <Text style={styles.orderDescTitle}>{props.desc.desc}</Text>
+      <Text style={styles.orderDescDetail}>{props.desc.descVal}</Text>
     </View>
   )
 }
 
-export { OrderDesc }
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingLeft: 8
+  },
+  orderDescTitle: {
+    marginLeft: 10,
+    fontSize: 12,
+    fontFamily: 'Montserrat-Medium',
+    color: '#9A9A9A'
+  },
+  orderDescDetail: {
+    marginStart: 10,
+    fontSize: 12,
+    fontFamily: 'Montserrat-Bold',
+    alignSelf: 'flex-end',
+    color: '#9A9A9A'
+  }
+})

@@ -1,8 +1,10 @@
 import React from 'react'
-import { View, FlatList, useWindowDimensions } from 'react-native'
+import { View, FlatList, StyleSheet } from 'react-native'
 import { Tab } from '../components/Products/Tab'
 import { Product } from '../components/Products/Product'
 import { Header } from '../components/Orders/Header'
+import LinearGradient from 'react-native-linear-gradient'
+
 const brands = [
   {
     logo: 'https://tinyurl.com/bdez2vj7',
@@ -48,39 +50,47 @@ const products = [
 const HEADER_IMAGE = 'https://tinyurl.com/2s4bb5sh'
 const TITLE = 'Sản phẩm'
 
-const Products = () => {
-  const { height, width } = useWindowDimensions()
+export default function Products() {
   return (
-    <FlatList 
-      showsVerticalScrollIndicator={false}
-      contentContainerStyle={{
-        backgroundColor: '#FCFCFC',
-        paddingHorizontal: width / 14
-      }}
-      data={[]}
-      renderItem={null}
-      ListHeaderComponent={
-        <View>
-          <Header 
-            title={TITLE} 
-            imageRight={HEADER_IMAGE}/>
-          <View style={{
-            flexDirection: 'row',
-            marginTop: 10,
-            justifyContent: 'space-between'
-          }}>
-            { brands.map((brand, index) => <Tab brand={brand} key={index.toString()} index={index}/>) }
+    <LinearGradient
+      style={styles.container} 
+      colors={['#ffffff', '#ece9e6']}
+      useAngle={true}
+      angle={145}>
+      <FlatList 
+        showsVerticalScrollIndicator={false}
+        data={[]}
+        renderItem={null}
+        ListHeaderComponent={
+          <View>
+            <Header 
+              title={TITLE} 
+              imageRight={HEADER_IMAGE}/>
+            <View style={styles.brands}>
+              { brands.map((brand, index) => <Tab brand={brand} key={index.toString()} index={index}/>) }
+            </View>
+            <View style={styles.products}>
+              { products.map((product, index) => <Product product={product} key={index.toString()} index={index}/>) }
+            </View>
           </View>
-          <View style={{
-            flexDirection: 'row',
-            flexWrap: 'wrap'
-          }}>
-            { products.map((product, index) => <Product product={product} key={index.toString()} index={index}/>) }
-          </View>
-        </View>
-      }/>
+        }/>
+    </LinearGradient>
   )
 }
 
-export { Products }
+const styles = StyleSheet.create({
+  container: {
+    flex: 1, 
+    paddingHorizontal: 24
+  },
+  brands: {
+    flexDirection: 'row',
+    marginTop: 10,
+    justifyContent: 'space-between'
+  },
+  products: {
+    flexDirection: 'row',
+    flexWrap: 'wrap'
+  }
+})
 

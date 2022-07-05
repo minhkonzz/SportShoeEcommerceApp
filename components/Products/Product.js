@@ -1,110 +1,122 @@
-import React, {useRef} from 'react'
-import { View, Text, Image, Animated, TouchableOpacity, useWindowDimensions } from 'react-native'
+import React, { useEffect, useRef } from 'react'
+import { View, Text, Image, Animated, TouchableOpacity, StyleSheet } from 'react-native'
 
-const Product = props => {
-  const { height, width } = useWindowDimensions()
+export function Product(props) {
+
   const prodAnim = useRef(new Animated.Value(0)).current;
-  React.useEffect(() => {
+
+  useEffect(() => {
     Animated.parallel( [
-    Animated.spring(prodAnim, {
-      toValue: 1,
-      delay: 2,
-      bounciness: 15,
-      useNativeDriver: true,
-      speed: 6,
-    })
-  ]).start()
-}, [])
+      Animated.spring(prodAnim, {
+        toValue: 1,
+        delay: 2,
+        bounciness: 15,
+        useNativeDriver: true,
+        speed: 6,
+      })
+    ]).start()
+  }, [])
+
   return (
-    <View style={{
-      width: width / 2.5,
-      height: height / (width < height ? 3.4 : 1.2),
-      marginLeft: props.index % 2 == 0 ? 0 : 23.5,
-      marginTop: props.index % 2 == 0 ? (props.index > 0 ? 20 : 50) : (props.index > 1 ? 50 : 80),
-    }}>
-      <Animated.View style={{
-        flex: 3,
-        backgroundColor: '#EEEEEE',
-        borderRadius: 25,
-        transform: [{scale: prodAnim}]
-        }}>
-        <View style={{ flex: 5 }}>
+    <View style={[
+      styles.container,
+      {
+        marginLeft: props.index % 2 == 0 ? 0 : 23.5,
+        marginTop: props.index % 2 == 0 ? (props.index > 0 ? 20 : 50) : (props.index > 1 ? 50 : 80)
+      }
+    ]}>
+      <Animated.View style={[styles.productStarImage, { transform: [{ scale: prodAnim }] }]}>
+        <View style={{ flex: 6 }}>
           <Image 
             source={{uri: props.product.image}}
-            style={[
-              {
-                width: width < height ? 168 : 300,
-                height: width < height ? 70 : 140,
-                marginLeft: width < height ? -16 : -8,
-                marginTop: width < height ? 8 : 4
-              },
-              { transform: [ {rotate: width < height ? '-38deg' : '-22deg'} ] }
-            ]}/>
+            style={[styles.productImage, { transform: [{rotate: '-32deg'}] }]}/>
         </View>
-        <View style={{
-          flex: 2, 
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          paddingHorizontal: 10
-        }}>
-          <View style={{
-            width: width < height ? '52%' : '42%',
-            height: width < height ? '72%' : '68%',
-            flexDirection: 'row',
-            backgroundColor: 'white',
-            borderRadius: 50,
-            justifyContent: 'space-around',
-            paddingHorizontal: width < height ? 10 : 16,
-            alignItems: 'center',
-            marginTop: width < height ? 3 : 14
-          }}>
+        <View style={styles.rateLike}>
+          <View style={styles.rate}>
             <Image 
               source={{uri: 'https://tinyurl.com/4hvm67p8'}}
-              style={{
-                width: width < height ? 17 : 26,
-                height: width < height ? 17 : 26
-              }}/>
-            <Text style={{ 
-              fontFamily: 'Montserrat-Bold',
-              fontSize: width < height ? 14 : 23 
-            }}>4.5</Text>
+              style={styles.rateStar}/>
+            <Text style={styles.rateScore}>4.5</Text>
           </View>
-          <TouchableOpacity style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: 'white',
-            borderRadius: width < height ? 15 : 22,
-            paddingVertical: width < height ? 11 : 21,
-            paddingHorizontal: width < height ? 12 : 20,
-            alignSelf: 'flex-start',
-            elevation: width < height ? 8 : 12
-          }}>
+          <TouchableOpacity style={styles.addWishlistBtn}>
             <Image 
               source={{uri: 'https://tinyurl.com/2p8c4cuc'}}
-              style={{
-                width: width < height ? 16 : 22,
-                height: width < height ? 16 : 22
-              }}/>
+              style={styles.addWishlistIc}/>
           </TouchableOpacity>
         </View>
       </Animated.View>
-      <View style={{
-        flex: 1, 
-        alignItems: 'center'
-      }}>
-        <Text style={{
-          marginTop: width < height ? 14 : 20,
-          fontSize: width < height ? 16 : 26,
-          fontFamily: 'Montserrat-Bold'
-        }}>{props.product.productName}</Text>
-        <Text style={{
-          marginTop: width < height ? 4 : 6,
-          fontFamily: 'Montserrat-Medium',
-          fontSize: width < height ? 13 : 17
-        }}>{props.product.price}</Text>
+      <View style={styles.namePrice}>
+        <Text style={styles.name}>{props.product.productName}</Text>
+        <Text style={styles.price}>{props.product.price}</Text>
       </View>
     </View>
   )
 }
 
-export { Product }
+const styles = StyleSheet.create({
+  container: {
+    width: 168,
+    height: 240
+  },
+  productStarImage: {
+    flex: 3,
+    backgroundColor: '#EEEEEE',
+    borderRadius: 25
+  },
+  productImage: {
+    width: 170,
+    height: 80,
+    marginLeft: -14,
+    marginTop: 7
+  },
+  rateLike: {
+    flex: 3, 
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 10
+  },
+  rate: {
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    borderRadius: 50,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    alignItems: 'center',
+  },
+  rateStar: {
+    width: 17,
+    height: 17
+  },
+  rateScore: {
+    fontFamily: 'Montserrat-Bold',
+    marginStart: 10
+  },
+  addWishlistBtn: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    borderRadius: 15,
+    paddingVertical: 11,
+    paddingHorizontal: 12,
+    elevation: 7
+  },
+  addWishlistIc: {
+    width: 16,
+    height: 16
+  },
+  namePrice: {
+    flex: 1, 
+    alignItems: 'center'
+  },
+  name: {
+    marginTop: 14,
+    fontSize: 16,
+    fontFamily: 'Montserrat-Bold'
+  },
+  price: {
+    marginTop: 6,
+    fontFamily: 'Montserrat-Medium',
+    fontSize: 12
+  }
+})

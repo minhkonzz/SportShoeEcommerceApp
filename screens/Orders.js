@@ -1,7 +1,8 @@
 import React from 'react'
-import { View, FlatList, useWindowDimensions } from 'react-native' 
+import { FlatList } from 'react-native' 
 import { Order } from '../components/Orders/Order'
 import { Header } from '../components/Orders/Header'
+import LinearGradient from 'react-native-linear-gradient'
 
 const WAIT_RECEIVE = 0
 const RECEIVED = 1
@@ -16,17 +17,17 @@ let ods = [
     month: 10,
     descs: [
       {
-        icon: 'https://tinyurl.com/ypfdbp3h',
+        icon: 'basket-outline',
         desc: 'Sản phẩm',
         descVal: 3
       },
       {
-        icon: 'https://tinyurl.com/4e8df64h',
+        icon: 'wallet-outline',
         desc: 'Cách thanh toán',
         descVal: 'trực tiếp'
       },
       {
-        icon: 'https://tinyurl.com/bd3p3vm2',
+        icon: 'time-outline',
         desc: 'Giao vào',
         descVal: '29-10-2021'
       }
@@ -41,17 +42,17 @@ let ods = [
     month: 10,
     descs: [
       {
-        icon: 'https://tinyurl.com/ypfdbp3h',
+        icon: 'basket-outline',
         desc: 'Sản phẩm',
         descVal: 2
       },
       {
-        icon: 'https://tinyurl.com/4e8df64h',
+        icon: 'wallet-outline',
         desc: 'Cách thanh toán',
         descVal: 'qua thẻ'
       },
       {
-        icon: 'https://tinyurl.com/bd3p3vm2',
+        icon: 'time-outline',
         desc: 'Giao vào',
         descVal: '05-10-2021'
       }
@@ -66,17 +67,17 @@ let ods = [
     month: 9,
     descs: [
       {
-        icon: 'https://tinyurl.com/ypfdbp3h',
+        icon: 'basket-outline',
         desc: 'Sản phẩm',
         descVal: 1
       },
       {
-        icon: 'https://tinyurl.com/4e8df64h',
+        icon: 'wallet-outline',
         desc: 'Cách thanh toán',
         descVal: 'qua thẻ'
       },
       {
-        icon: 'https://tinyurl.com/bd3p3vm2',
+        icon: 'time-outline',
         desc: 'Giao vào',
         descVal: '13-09-2021'
       }
@@ -90,27 +91,26 @@ let ods = [
 
 const SCREEN_NAME = 'Orders'
 
-const Orders = () => {
-  console.log('render Orders screen')
-  const width = useWindowDimensions().width
+export default function Orders() {
   return (
-    <FlatList 
-      contentContainerStyle={{
-        backgroundColor: '#FCFCFC'
-      }}
-      showsVerticalScrollIndicator={false}
-      data={[]}
-      renderItem={null}
-      ListHeaderComponent={
-        <View style={{ paddingHorizontal: width / 14, backgroundColor: '#fcfcfc' }}>
-          <Header 
-            title={'Đơn hàng của tôi'}
-            imageRight={'https://tinyurl.com/5drx39ej'}
-            screen={SCREEN_NAME}/>
-          { ods.map((order, index) => <Order index={index} order={order} orders={ods}/>) }
-        </View>
-      }/>
+    <LinearGradient
+      style={{ flex: 1, paddingHorizontal: 24 }} 
+      colors={['#ffffff', '#e9e9e9']}
+      useAngle={true}
+      angle={180}>
+      <FlatList 
+        showsVerticalScrollIndicator={false}
+        data={[]}
+        renderItem={null}
+        ListHeaderComponent={
+          <>
+            <Header 
+              title={'Đơn hàng của tôi'}
+              imageRight={'https://scontent.fhan3-5.fna.fbcdn.net/v/t1.15752-9/238596540_1224566681390021_1944068077931728533_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=ae9488&_nc_ohc=BYim7vLOGnwAX9j5Ifr&_nc_ht=scontent.fhan3-5.fna&oh=03_AVL35OnnPV5YlJpbMNUrYHX1jiaofl6J54G6V4p6NwdRxQ&oe=62E7DD8F'}
+              screen={SCREEN_NAME}/>
+            { ods.map((order, index) => <Order index={index} order={order} orders={ods}/>) }
+          </>
+        }/>
+    </LinearGradient>
   )
 }
-
-export { Orders }

@@ -1,19 +1,15 @@
-import React, { useRef } from 'react'
-import { View, Image, Text, LogBox, Animated, TouchableOpacity, useWindowDimensions } from 'react-native'
-LogBox.ignoreLogs(['Warning: ...']);
-LogBox.ignoreAllLogs();
-const AdjustAmountButton = props => {
-  const { height, width } = useWindowDimensions()
+import React, { useEffect, useRef } from 'react'
+import { View, Image, Text, Animated, TouchableOpacity, StyleSheet } from 'react-native'
+
+function AdjustAmountButton(props) {
   return (
-    <TouchableOpacity style={{
-      width: width < height ? 28 : 33,
-      height: width < height ? 28 : 33,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: props.bgColor,
-      elevation: props.bgColor == 'white' ? 5 : 0,
-      borderRadius: 8
-    }}>
+    <TouchableOpacity style={[
+      styles.amountBtn,
+      {
+        backgroundColor: props.bgColor,
+        elevation: props.bgColor == 'white' ? 5 : 0,
+      }
+    ]}>
       <Text style={{
         fontSize: 20,
         fontWeight: props.bgColor == 'white' ? 'bold' : '400',
@@ -23,10 +19,11 @@ const AdjustAmountButton = props => {
   )
 }
 
-const Product = ({product}) => {
-  const { height, width } = useWindowDimensions()
+export function Product({product}) {
+
   const slidefromRight = useRef(new Animated.Value(500)).current;
-  React.useEffect(() => {
+
+  useEffect(() => {
     Animated.stagger(500, [
       Animated.timing(
         slidefromRight,{
@@ -36,92 +33,100 @@ const Product = ({product}) => {
       ),
     ]).start()
   }, [])
+
   return (
-    <Animated.View style={{
-      width: width / (width < height ? 1.2 : 1.15),
-      height: height / (width < height ? 6 : 2.5),
-      borderRadius: 10,
-      backgroundColor: 'white',
-      flexDirection: 'row',
-      padding: 8,
-      marginTop: 25,
-      elevation: 5,
-      alignSelf: 'center',
-      marginLeft: slidefromRight
-      }}>
-      <View style={{
-        flex: width < height ? 4 : 3,
-        justifyContent: 'center',
-        alignItems: 'center',
-        paddingRight: 10,
-      }}>
+    <Animated.View style={[styles.container, { marginLeft: slidefromRight }]}>
+      <View style={styles.imageContainer}>
         <Image 
           source={{uri: 'https://scontent.fhan15-2.fna.fbcdn.net/v/t1.15752-9/281298551_550377153271714_8055113135333945283_n.png?_nc_cat=111&ccb=1-7&_nc_sid=ae9488&_nc_ohc=eCgl4qcGnsMAX-hMXmZ&_nc_ht=scontent.fhan15-2.fna&oh=03_AVKdg0f40vldc5sarmmAvoj0qNiVkJfYiP7OK-wiwRyUFQ&oe=62BE705F'}}
-          style={{
-            width: width < height ? 140 : 220,
-            height: width < height ? 60 : 100
-          }}/>
+          style={styles.image}/>
       </View>
-      <View style={{
-        flex: 3, 
-        justifyContent: 'space-around',
-        paddingVertical: 5
-      }}>
-        <Text style={{
-          color: '#9A9A9A',
-          fontFamily: 'Montserrat-Bold',
-          fontSize: width < height ? 13 : 20
-        }}>{product.productName}</Text>
-        <Text style={{
-          color: '#5F5E5E',
-          fontFamily: 'Montserrat-Medium',
-          fontSize: width < height ? 12 : 19
-        }}>450000</Text>
-        <View style={{
-          flexDirection: 'row',
-          alignItems: 'center'
-        }}>
-          <Text style={{
-            fontFamily: 'Montserrat-Medium',
-            fontSize: width < height ? 12 : 19
-          }}>Màu</Text>
-          <View style={{
-            width: width < height ? 15 : 18,
-            height: width < height ? 15 : 18,
-            borderRadius: 10,
-            backgroundColor: product.color, 
-            marginLeft: width / 70,
-            elevation: 3
-          }}/>
+      <View style={styles.productInfo}>
+        <Text style={styles.name}>{product.productName}</Text>
+        <Text style={[styles.textMedium, { color: '#5F5E5E' }]}>450000</Text>
+        <View style={styles.color}>
+          <Text style={styles.textMedium}>Màu</Text>
+          <View style={[styles.colorInstance, { backgroundColor: product.color }]}/>
         </View>
-        <Text style={{
-          fontFamily: 'Montserrat-Medium',
-          fontSize: width < height ? 12 : 19
-        }}>{`Size ${product.size}`}</Text>
+        <Text style={styles.textMedium}>{`Size ${product.size}`}</Text>
       </View>
-      <View style={{
-        flex: 1,
-        justifyContent: 'flex-end',
-        alignItems: 'flex-end'
-      }}>
-        <View style={{  alignItems: 'center' }}>
+      <View style={ styles.amount }>
+        <View style={{ alignItems: 'center' }}>
           <AdjustAmountButton 
-            symbol={'-'} 
-            bgColor={'white'}
-            textColor={'#5F5E5E'}/>
-          <Text style={{ 
-            fontSize: width < height ? 14 : 18,
-            marginVertical: 5,
-            fontWeight: 'bold' 
-          }}>2</Text>
+            symbol='-' 
+            bgColor='white'
+            textColor='#5F5E5E'/>
+          <Text style={styles.amountText}>2</Text>
           <AdjustAmountButton 
-            symbol={'+'} 
-            bgColor={'#363636'}
-            textColor={'white'}/>
+            symbol='+' 
+            bgColor='#363636'
+            textColor='white'/>
         </View>
       </View>
     </Animated.View>
   )
 }
 
-export { Product }
+const styles = StyleSheet.create({
+  container: {
+    height: 120,
+    borderRadius: 10,
+    backgroundColor: 'white',
+    flexDirection: 'row',
+    padding: 8,
+    marginTop: 25,
+    alignSelf: 'center'
+  },
+  textMedium: {
+    fontFamily: 'Montserrat-Medium',
+    fontSize: 12
+  },
+  imageContainer: {
+    flex: 4,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingRight: 10
+  },
+  image: {
+    width: 140,
+    height: 60
+  },
+  productInfo: {
+    flex: 3, 
+    justifyContent: 'space-around',
+    paddingVertical: 5
+  },
+  name: {
+    color: '#9A9A9A',
+    fontFamily: 'Montserrat-Bold',
+    fontSize: 13
+  },
+  color: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  colorInstance: {
+    width: 15,
+    height: 15,
+    borderRadius: 10,
+    marginStart: 7,
+    elevation: 3
+  },
+  amount: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end'
+  },
+  amountText: {
+    fontSize: 14,
+    marginVertical: 5,
+    fontWeight: 'bold' 
+  },
+  amountBtn: {
+    width: 28,
+    height: 28,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 8
+  }
+})

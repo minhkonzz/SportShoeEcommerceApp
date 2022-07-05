@@ -1,37 +1,35 @@
 import React from 'react';
-import { View, TextInput, Image, Dimensions } from 'react-native'
+import { View, TextInput, StyleSheet } from 'react-native'
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
-const { height, width } = Dimensions.get('window')
+export function AuthUserInput(props) {
 
-const AuthUserInput = props => {
   const { imageSource, placeHolderInput } = props.res
+
   return (
-    <View style={{
-      width: width / 1.38,
-      height: height / 15,
-      justifyContent: 'center',
-      marginTop: 15
-    }}>
+    <View style={styles.container}>
       <TextInput 
         secureTextEntry={props.isPassword}
-        style={{
-          width: width/1.38,
-          height: height/15,
-          borderRadius: 40,
-          paddingLeft: 50,
-          position: 'absolute',
-          backgroundColor: '#E4E4E4' 
-      }}
+        style={styles.input}
         placeholder={placeHolderInput}
         onChangeText={v => props.onChangeText(v)}/>
-      <Image 
-        style={{
-          width: 20,
-          height: 20,
-          marginLeft: '6%'
-        }}
-        source={{uri: imageSource}}/>
+      <Ionicons style={{ marginStart: 15 }} name={imageSource} size={20} color='#5f5e5e'/>
     </View>
   )
 }
-export { AuthUserInput }
+
+const styles = StyleSheet.create({
+  container: {
+    height: 55,
+    justifyContent: 'center',
+    marginTop: 15
+  },
+  input: {
+    width: '100%',
+    height: 55,
+    borderRadius: 40,
+    paddingLeft: 50,
+    position: 'absolute',
+    backgroundColor: '#E4E4E4' 
+  }
+})
