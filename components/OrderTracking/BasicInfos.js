@@ -1,5 +1,5 @@
 import React from 'react'
-import { View,  useWindowDimensions } from 'react-native'
+import { View } from 'react-native'
 import { BasicInfo } from './BasicInfo'
 
 const basicInfos = [
@@ -25,16 +25,10 @@ const basicInfos = [
   }
 ]
 
-const BasicInfos = () => {
-  const { height, width } = useWindowDimensions()
+export function BasicInfos() {
   return (
-    <View style={{  
-      marginTop: height / 40,
-      marginBottom: height / (width < height ? 50 : 18),
-    }}>
+    <View style={{ marginTop: 20 }}>
       { basicInfos.map((info, index) => <BasicInfo key={index} index={index} info={info} infoAmount={basicInfos.length} />) }
     </View>
   )
 }
-
-export { BasicInfos }

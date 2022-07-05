@@ -1,34 +1,25 @@
 import React from 'react'
-import { View, Text, Image, TouchableOpacity, useWindowDimensions } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
-const OrderTrackingHeader = () => {
-  const { height, width } = useWindowDimensions()
+export function OrderTrackingHeader() {
   return (
-    <View style={{
-      height: height / (width < height ? 12 : 5),  
-      paddingTop: height / (width < height ? 25 : 14)
-    }}>
-      <TouchableOpacity style={{
-        justifyContent: 'center',
-        alignItems: 'center',
-        alignSelf: 'flex-start',
-        marginBottom: -height / (width < height ? 40 : 25)
-      }}>
-        <Image 
-          source={{uri: 'https://tinyurl.com/3u6e3wej'}}
-          style={{
-            width: 15, 
-            height: 15
-          }}/>
-      </TouchableOpacity>
-      <Text style={{
-        color: '#5f5e5e',
-        fontSize: 18,
-        fontFamily: 'Montserrat-Bold',
-        alignSelf: 'center'
-      }}>Order Tracking</Text>
+    <View style={styles.container}>
+      <Ionicons name='chevron-back' size={28} />
+      <Text style={styles.title}>Order Tracking</Text>
     </View>
   )
 }
 
-export { OrderTrackingHeader }
+const styles = StyleSheet.create({
+  container: {
+    height: 80,
+    justifyContent: 'center'
+  },
+  title: {
+    color: '#5f5e5e',
+    fontSize: 18,
+    fontFamily: 'Montserrat-Bold',
+    alignSelf: 'center'
+  }
+})

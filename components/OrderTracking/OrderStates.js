@@ -1,5 +1,5 @@
-import React, {useRef} from 'react'
-import { View,  Animated, useWindowDimensions } from 'react-native'
+import React, { useEffect, useRef } from 'react'
+import { Animated } from 'react-native'
 import { OrderState } from './OrderState'
 
 const OrderObject = {
@@ -24,27 +24,28 @@ const OrderObject = {
   ]
 }
 
-const OrderStates = () => {
-  const { height, width } = useWindowDimensions()
+export function OrderStates() {
+
   const fadeText = useRef(new Animated.Value(0)).current;
-  React.useEffect(() => {
-      Animated.timing(
-        fadeText,{
-          toValue: 1,
-          delay: 1,
-          useNativeDriver: true,
-          duration: 1000,
-        }
-      ).start()
+
+  useEffect(() => {
+    Animated.timing(
+      fadeText,{
+        toValue: 1,
+        delay: 1,
+        useNativeDriver: true,
+        duration: 1000,
+      }
+    ).start()
   }, [])
+
   return (
-    <View>
+    <>
       <Animated.Text style={{
-        paddingTop: height / (width < height ? 40 : 20),
-        paddingBottom: height / (width < height ? 30 : 14),
+        marginVertical: 30,
         color: '#5F5E5E',
         fontFamily: 'Montserrat-Bold',
-        fontSize: width < height ? 15 : 19,
+        fontSize: 15,
         opacity: fadeText
       }}>
         Trạng thái đơn hàng
@@ -57,8 +58,6 @@ const OrderStates = () => {
           statesAmount={OrderObject.orderStates.length} />
         ) 
       }
-    </View>
+    </>
   )
 }
-
-export { OrderStates }

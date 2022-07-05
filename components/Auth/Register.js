@@ -1,19 +1,17 @@
-import React from 'react'
-import { View, Text, TouchableOpacity, Dimensions } from 'react-native'
+import React, { useState } from 'react'
+import { View, Text, TouchableOpacity } from 'react-native'
 import { AuthUserInput } from './AuthUserInput'
 
-const { height, width } = Dimensions.get('window')
+export function Register() {
 
-const Register = () => {
-  const [ userName, setUserName ] = React.useState('')
-  const [ email, setEmail ] = React.useState('')
-  const [ password, setPassword ] = React.useState('')
+  const [ userName, setUserName ] = useState('')
+  const [ email, setEmail ] = useState('')
+  const [ password, setPassword ] = useState('')
+
   return (
     <View style={{
       width: '100%', 
-      // height: '100%',
-      alignItems: 'center',
-      alignSelf: 'flex-end',
+      alignSelf: 'flex-end'
     }}>
       <AuthUserInput 
         res={{
@@ -36,8 +34,7 @@ const Register = () => {
       <TouchableOpacity 
         style={{
           marginTop: '5%',
-          width: width / 1.5,
-          height: height / 14,
+          height: 60,
           elevation: 5,
           borderRadius: 10,
           backgroundColor: '#5F5E5E',
@@ -45,13 +42,8 @@ const Register = () => {
           alignItems: 'center'
         }} 
         activeOpacity={0.8}>
-        <Text style={{
-          color: 'white',
-          fontSize: 16
-        }}>Đăng ký</Text>
+        <Text style={{ color: 'white' }}>Đăng ký</Text>
       </TouchableOpacity>
     </View>
   )
 }
-
-export { Register }

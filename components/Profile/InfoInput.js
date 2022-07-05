@@ -1,10 +1,12 @@
-import React, {useRef} from 'react'
-import { View, Text, TextInput, Animated, Image, useWindowDimensions } from 'react-native'
+import React, { useEffect, useRef } from 'react'
+import { View, Text, TextInput, Animated, StyleSheet } from 'react-native'
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
-const InfoInput = props => {
-  const { height, width } = useWindowDimensions()
+export function InfoInput(props) {
+
   const bounce = useRef(new Animated.Value(0)).current;
-  React.useEffect(() => {
+
+  useEffect(() => {
     Animated.stagger(300, [
       Animated.spring(
         bounce,{
@@ -17,40 +19,41 @@ const InfoInput = props => {
       ),
     ]).start()
   }, [])
+
   return (
-      <Animated.View style={{
-        marginTop: height / (width < height ? 38 : 14), 
-        width: width / (width < height ? 1.2 : 1.15),
-        transform: [{ scale: bounce}]
-      }}>
-        <View style={{
-          flexDirection: 'row',
-          alignItems: 'center'
-        }}>
-          <Image 
-            source={{uri: props.info.image}}
-            style={{
-              width: width < height ? 20 : 30,
-              height: width < height ? 20 : 30
-            }}/>
-          <Text style={{
-            marginLeft: 10,
-            fontSize: width < height ? 12 : 16,
-            fontFamily: 'Montserrat-Medium'
-          }}>{props.info.title}</Text>
-        </View>
-        <TextInput style={{
-          height: height / (width < height ? 12 : 6),
-          borderRadius: 8,
-          marginTop: 14,
-          backgroundColor: '#EEEEEE',
-          paddingLeft: width / (width < height ? 24 : 36),
-          fontFamily: 'Montserrat-Bold',
-          fontSize: width < height ? 16 : 19,
-          color: '#5f5e5e'
-        }}/>
-      </Animated.View>
+    <Animated.View style={[styles.container, { transform: [{ scale: bounce }] }]}>
+      <View style={styles.inputTitle}>
+        <Ionicons name={props.info.image} size={20} color={'#5f5e5e'}/>
+        <Text style={styles.inputTitleText}>{props.info.title}</Text>
+      </View>
+      <TextInput style={styles.userInput}/>
+    </Animated.View>
   )
 }
 
-export { InfoInput }
+const styles = StyleSheet.create({
+  container: { marginTop: 25 },
+  inputTitle: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  inputTitleIc: {
+    width: 20,
+    height: 20
+  },
+  inputTitleText: {
+    marginLeft: 10,
+    fontSize: 12,
+    fontFamily: 'Montserrat-Medium'
+  },
+  userInput: {
+    height: 58,
+    borderRadius: 8,
+    marginTop: 14,
+    backgroundColor: '#EEEEEE',
+    paddingLeft: 14,
+    fontFamily: 'Montserrat-Bold',
+    fontSize: 16,
+    color: '#5f5e5e'
+  }
+})

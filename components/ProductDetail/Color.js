@@ -1,10 +1,11 @@
 import React from 'react'
-import { View, useWindowDimensions } from 'react-native'
+import { View, Dimensions } from 'react-native'
 
 const colors = ['white', 'gray', 'black']
 
-const Colors = () => {
-  const { height, width } = useWindowDimensions()
+const { height, width } = Dimensions.get('window')
+
+export function Colors() {
   return (
     <View style={{
       marginLeft: 8, 
@@ -23,5 +24,3 @@ const Colors = () => {
     </View>
   )
 }
-
-export { Colors }

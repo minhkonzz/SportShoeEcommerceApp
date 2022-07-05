@@ -1,7 +1,8 @@
 import React from 'react'
-import { View, FlatList, useWindowDimensions } from 'react-native'
+import { FlatList } from 'react-native'
 import { Header } from '../components/Orders/Header'
 import { Product } from '../components/Wishlist/Product'
+import LinearGradient from 'react-native-linear-gradient'
 
 const TITLE = 'Sản phẩm yêu thích'
 const SCREEN_NAME = 'Whislist'
@@ -46,30 +47,29 @@ const wishlist = [
   }
 ]
 
-const Wishlist = () => {
-  console.log('render Wishlist screen')
-  const { height, width } = useWindowDimensions()
+export default function Wishlist() {
+
   return (
-    <FlatList
-      contentContainerStyle={{
-        flex: 1,
-        backgroundColor: '#FCFCFC'
-      }} 
-      showsVerticalScrollIndicator={false}
-      data={[]}
-      renderItem={null}
-      ListHeaderComponent={
-        <View style={{ paddingHorizontal: width / 14, paddingBottom: height / 40 }}>
-          <Header 
-            title={TITLE}
-            imageRight={HEADER_IMAGE}
-            screen={SCREEN_NAME}/>
-          { wishlist.map((product, index) => 
-              <Product key={index} index={index} product={product}/>
-          ) }
-        </View>
-      }/>
+    <LinearGradient
+      style={{ flex: 1, paddingHorizontal: 24 }} 
+      colors={['#ffffff', '#ece9e6']}
+      useAngle={true}
+      angle={145}>
+      <FlatList
+        showsVerticalScrollIndicator={false}
+        data={[]}
+        renderItem={null}
+        ListHeaderComponent={
+          <>
+            <Header 
+              title={TITLE}
+              imageRight={HEADER_IMAGE}
+              screen={SCREEN_NAME}/>
+            { 
+              wishlist.map((product, index) => <Product key={index} index={index} product={product}/>) 
+            }
+          </>
+        }/>
+    </LinearGradient>
   )
 }
-
-export { Wishlist }

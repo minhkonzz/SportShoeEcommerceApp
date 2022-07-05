@@ -1,10 +1,11 @@
-import React, {useRef} from 'react'
-import { View, Text, Animated, Image, TouchableOpacity, useWindowDimensions } from 'react-native'
+import React, { useEffect, useRef } from 'react'
+import { View, Text, Animated, Image, TouchableOpacity, StyleSheet } from 'react-native'
 
-const Header = () => {
-  const { height, width } = useWindowDimensions()
+export function Header() {
+
   const bounce = useRef(new Animated.Value(0)).current;
-  React.useEffect(() => {
+
+  useEffect(() => {
     Animated.timing(bounce, {
       toValue: 1,
       delay: 2,
@@ -12,73 +13,63 @@ const Header = () => {
       useNativeDriver: true,
       speed: 6,
     }).start()
-}, [])
+  }, [])
+
   return (
-      <Animated.View style={{
-        width: width / (width < height ? 1.2 : 1.15),
-        height: height / (width < height ? 5.5 : 2.5),
-        backgroundColor: '#5F5E5E',
-        borderRadius: width < height ? 12 : 16,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        paddingHorizontal: width / (width < height ? 18 : 16),
-        marginBottom: height / (width < height ? 50 : 20),
-        transform: [{ scale: bounce}]
-      }}>
-        <Image 
-          source={{uri: 'https://tinyurl.com/2p899ms8'}}
-          style={{
-            width: width < height ? 80 : 100,
-            height: width < height ? 80 : 100,
-            borderRadius: 50,
-            borderColor: '#fcfcfc',
-            borderWidth: width < height ? 2.5 : 3
-          }}/>
-        <View style={{ marginRight: width / (width < height ? 6 : 3) }}>
-          <Text style={{
-            fontSize: width < height ? 15 : 22,
-            fontFamily: 'Montserrat-Bold',
-            color: '#fcfcfc',
-            lineHeight: width < height ? 22 : 30
-          }}>Minh Pham</Text>
-          <Text style={{
-            fontSize: width < height ? 9.5 : 13,
-            fontFamily: 'Montserrat-Medium',
-            color: '#fcfcfc',
-            lineHeight: width < height ? 22 : 30
-          }}>New customer</Text>
-          <View style={{
-            flexDirection: 'row',
-            alignItems: 'center'
-          }}>
-            <Image 
-              source={{uri: 'https://tinyurl.com/5yws4ah6'}}
-              style={{
-                width: width < height ? 15 : 18,
-                height: width < height ? 15 : 18
-              }}/>
-            <Text style={{
-              marginLeft: 5,
-              fontSize: width < height ? 9.5 : 13,
-              fontFamily: 'Montserrat-Medium',
-              color: '#fcfcfc'
-            }}>1 đánh giá</Text>
-          </View>
+    <Animated.View style={[styles.container, { transform: [{ scale: bounce }] }]}>
+      <Image source={{uri: 'https://tinyurl.com/2p899ms8'}} style={styles.avatar}/>
+      <View style={{ marginRight: 100 }}>
+        <Text style={styles.text}>Minh Pham</Text>
+        <Text style={[styles.text, { fontSize: 9.5 }]}>New customer</Text>
+        <View style={styles.reviewCount}>
+          <Image source={{uri: 'https://tinyurl.com/5yws4ah6'}} style={styles.reviewCountStar}/>
+          <Text style={[styles.text, { fontSize: 10, marginStart: 5 }]}>1 đánh giá</Text>
         </View>
-        <TouchableOpacity style={{
-          justifyContent: 'center',
-          alignItems: 'center'
-        }}>
-          <Image 
-            source={{uri: 'https://tinyurl.com/25efyyza'}}
-            style={{
-              width: width < height ? 18 : 24,
-              height: width < height ? 18 : 24
-            }}/>
-        </TouchableOpacity>
-      </Animated.View>
+      </View>
+      <TouchableOpacity style={styles.logoutBtn}>
+        <Image source={{uri: 'https://tinyurl.com/25efyyza'}} style={styles.logoutIc}/>
+      </TouchableOpacity>
+    </Animated.View>
   )
 }
 
-export { Header }
+const styles = StyleSheet.create({
+  container: {
+    height: 140,
+    backgroundColor: '#5F5E5E',
+    borderRadius: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 24,
+    marginBottom: 10
+  },
+  text: {
+    fontFamily: 'Montserrat-Medium',
+    color: '#fcfcfc',
+    lineHeight: 22
+  },
+  avatar: {
+    width: 80,
+    height: 80,
+    borderRadius: 50,
+    borderColor: '#fcfcfc',
+    borderWidth: 2.5
+  },
+  reviewCount: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  reviewCountStar: {
+    width: 15,
+    height: 15
+  },
+  logoutBtn: {
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  logoutIc: {
+    width: 18,
+    height: 18
+  }
+})

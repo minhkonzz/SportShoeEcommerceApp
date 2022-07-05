@@ -1,27 +1,30 @@
 import React from 'react'
-import { View, FlatList, useWindowDimensions } from 'react-native'
+import { FlatList } from 'react-native'
 import { OrderTrackingHeader } from '../components/OrderTracking/OrderTrackingHeader'
 import { BasicInfos } from '../components/OrderTracking/BasicInfos'
 import { OrderProducts } from '../components/OrderTracking/OrderProducts'
 import { OrderStates } from '../components/OrderTracking/OrderStates'
+import LinearGradient from 'react-native-linear-gradient'
 
-const OrderTracking = () => {
-  const width = useWindowDimensions().width
+export default function OrderTracking() {
   return (
-    <FlatList 
-      contentContainerStyle={{ backgroundColor: '#FCFCFC' }}
-      showsVerticalScrollIndicator={false}
-      data={[]}
-      renderItem={null}
-      ListHeaderComponent={
-        <View style={{ paddingHorizontal: width / 14 }}>
-          <OrderTrackingHeader />
-          <BasicInfos />
-          <OrderStates />
-          <OrderProducts />
-        </View>
-      }/>
+    <LinearGradient
+      style={{ flex: 1, paddingHorizontal: 24 }} 
+      colors={['#ffffff', '#ece9e6']}
+      useAngle={true}
+      angle={145}>
+      <FlatList 
+        showsVerticalScrollIndicator={false}
+        data={[]}
+        renderItem={null}
+        ListHeaderComponent={
+          <>
+            <OrderTrackingHeader />
+            <BasicInfos />
+            <OrderStates />
+            <OrderProducts />
+          </>
+        }/>
+    </LinearGradient>
   )
 }
-
-export { OrderTracking }

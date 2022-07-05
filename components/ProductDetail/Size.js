@@ -1,32 +1,24 @@
 import React from 'react'
-import { View, Text, useWindowDimensions } from 'react-native'
+import { View, Text } from 'react-native'
 
 const sizes = [38, 39, 40, 41]
 
-const Sizes = () => {
-  const { height, width } = useWindowDimensions()
+export function Sizes() {
   return (
-    <View style={{
-      marginLeft: 8, 
-      flexDirection: 'row'
-    }}>
+    <View style={{ marginLeft: 8, flexDirection: 'row' }}>
       { sizes.map((size, index) => 
           <Text 
             key={index} 
             style={{ 
-              paddingVertical: height / (width < height ? 60 : 20),
-              paddingHorizontal: width / 30,
+              padding: 13,
               borderRadius: 6, 
               backgroundColor: 'white', 
-              marginLeft: width / 38,
+              marginStart: 12,
               fontSize: 15,
               fontFamily: 'Montserrat-Medium'
-            }}>{size}
-          </Text>
+            }}>{size}</Text>
         ) 
       }
     </View>
   )
 }
-
-export { Sizes }
